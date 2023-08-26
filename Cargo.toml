@@ -11,4 +11,5 @@ proc-macro = true
 proc-macro2 = {version = "=1.0.60"}
 quote = {version = "=1.0.28"}
 syn = {version = "=1.0.107"}
+convert_case = {version = "=0.6.0"}
 proc_macro_helpers = {path = "../proc_macro_helpers"}
