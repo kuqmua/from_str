@@ -35,7 +35,7 @@ pub fn from_str(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     let error_variants_stringified =
         variant_idents
             .iter()
-            .fold(std::string::String::from(""), |mut acc, variant_ident| {
+            .fold(std::string::String::default(), |mut acc, variant_ident| {
                 let variant_ident_lower_case_stringified = convert_case::Casing::to_case(
                     &format!("{variant_ident}"),
                     convert_case::Case::Lower,
