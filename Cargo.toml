@@ -13,3 +13,6 @@ quote = {version = "=1.0.33"}
 syn = {version = "=1.0.107"}
 convert_case = {version = "=0.6.0"}
 proc_macro_helpers = {path = "../proc_macro_helpers"}
+
+[lints]
+workspace = true
