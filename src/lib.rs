@@ -23,24 +23,24 @@ pub fn from_str(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
         })
         .collect::<Vec<syn::Ident>>();
     let variants_token_stream = variant_idents.iter().map(|variant_ident| {
-        let variant_ident_lower_case_token_stream = {
-            let variant_ident_lower_case_stringified = convert_case::Casing::to_case(&format!("\"{variant_ident}\""), convert_case::Case::Lower);
-            variant_ident_lower_case_stringified.parse::<proc_macro2::TokenStream>()
-            .unwrap_or_else(|_| panic!("{proc_macro_name_ident_stringified} {variant_ident_lower_case_stringified} {}", proc_macro_helpers::global_variables::hardcode::PARSE_PROC_MACRO2_TOKEN_STREAM_FAILED_MESSAGE))
+        let variant_ident_snake_case_token_stream = {
+            let variant_ident_snake_case_stringified = convert_case::Casing::to_case(&format!("\"{variant_ident}\""), convert_case::Case::Snake);
+            variant_ident_snake_case_stringified.parse::<proc_macro2::TokenStream>()
+            .unwrap_or_else(|_| panic!("{proc_macro_name_ident_stringified} {variant_ident_snake_case_stringified} {}", proc_macro_helpers::global_variables::hardcode::PARSE_PROC_MACRO2_TOKEN_STREAM_FAILED_MESSAGE))
         };
         quote::quote! {
-            #variant_ident_lower_case_token_stream => Ok(Self::#variant_ident),
+            #variant_ident_snake_case_token_stream => Ok(Self::#variant_ident),
         }
     });
     let error_variants_stringified =
         variant_idents
             .iter()
             .fold(std::string::String::default(), |mut acc, variant_ident| {
-                let variant_ident_lower_case_stringified = convert_case::Casing::to_case(
+                let variant_ident_snake_case_stringified = convert_case::Casing::to_case(
                     &format!("{variant_ident}"),
-                    convert_case::Case::Lower,
+                    convert_case::Case::Snake,
                 );
-                acc.push_str(&format!("\'{variant_ident_lower_case_stringified}\',"));
+                acc.push_str(&format!("\'{variant_ident_snake_case_stringified}\',"));
                 acc
             });
     let error_token_stream = {
