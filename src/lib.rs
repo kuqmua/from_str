@@ -11,7 +11,7 @@ pub fn from_str(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     } else {
         panic!(
             "{proc_macro_name_ident_stringified} {} syn::Data::Enum",
-            proc_macro_helpers::error_occurence::hardcode::SUPPORTS_ONLY_STRINGIFIED
+            proc_macro_helpers::naming_conventions::SUPPORTS_ONLY_STRINGIFIED
         );
     };
     let variant_idents = data_enum
